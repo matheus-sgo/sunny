@@ -96,6 +96,17 @@ Abra o **DBeaver** ou outro gerenciador MySQL e execute o script `.sql` fornecid
 
 A conexão com o banco de dados é feita pela classe **`DatabaseConnection`**, já incluída no projeto.
 
+As credenciais não ficam no código. Antes de executar, defina as variáveis de ambiente:
+
+| Variável | Descrição | Padrão |
+|---|---|---|
+| `MP_ACCESS_TOKEN` | Access token do Mercado Pago (obrigatório para doações via PIX) | — |
+| `DB_URL` | URL JDBC do MySQL | `jdbc:mysql://localhost:3306/projeto_sunny` |
+| `DB_USER` | Usuário do banco | `root` |
+| `DB_PASSWORD` | Senha do banco | vazio |
+
+No IntelliJ IDEA, configure em *Run → Edit Configurations → Environment variables*.
+
 ### 4. Execute a aplicação
 
 Abra o projeto na **IntelliJ IDEA** e execute a classe principal localizada em `src/main/java/main/Main.java`.

@@ -13,8 +13,16 @@ import java.util.Map;
 
 public class PixGenerator {
 
+    private static String accessToken() {
+        String token = System.getenv("MP_ACCESS_TOKEN");
+        if (token == null || token.isBlank()) {
+            throw new IllegalStateException("Defina a variável de ambiente MP_ACCESS_TOKEN com o access token do Mercado Pago.");
+        }
+        return token;
+    }
+
     public static Map<String, String> gerarPix(BigDecimal valor, String email) throws Exception {
-        MercadoPagoConfig.setAccessToken("APP_USR-1029819585391993-090115-bfee3d69d772551e75f4f23954e2ef10-1185798625");
+        MercadoPagoConfig.setAccessToken(accessToken());
 
         Map<String, String> customHeaders = new HashMap<>();
         customHeaders.put("x-idempotency-key", String.valueOf(System.currentTimeMillis()));
@@ -48,7 +56,7 @@ public class PixGenerator {
     }
     
     public static String consultarStatusPagamento(String paymentId) throws Exception {
-        MercadoPagoConfig.setAccessToken("APP_USR-1029819585391993-090115-bfee3d69d772551e75f4f23954e2ef10-1185798625");
+        MercadoPagoConfig.setAccessToken(accessToken());
 
         PaymentClient client = new PaymentClient();
         Payment payment = client.get(Long.valueOf(paymentId));
